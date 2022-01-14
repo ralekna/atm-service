@@ -1,2 +1,2 @@
-# atm-service
+# AtmService
 A mock implementation of ATM service
