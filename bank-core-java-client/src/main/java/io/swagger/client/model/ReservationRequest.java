@@ -38,7 +38,14 @@ public class ReservationRequest {
     return this;
   }
 
-   /**
+  public ReservationRequest(String accountNumber, Integer reservedAmount) {
+    this.accountNumber = accountNumber;
+    this.reservedAmount = reservedAmount;
+  }
+
+  public ReservationRequest() {}
+
+  /**
    * Get accountNumber
    * @return accountNumber
   **/

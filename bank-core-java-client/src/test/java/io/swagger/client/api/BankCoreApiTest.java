@@ -12,95 +12,156 @@
 
 package io.swagger.client.api;
 
-import io.swagger.client.ApiException;
+import com.google.gson.Gson;
+import com.squareup.okhttp.mockwebserver.MockResponse;
+import com.squareup.okhttp.mockwebserver.MockWebServer;
+import com.squareup.okhttp.mockwebserver.RecordedRequest;
 import io.swagger.client.model.BalanceResponse;
 import io.swagger.client.model.CardResponse;
 import io.swagger.client.model.ReservationRequest;
 import io.swagger.client.model.ReservationResponse;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.Ignore;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * API tests for BankCoreApi
  */
-@Ignore
 public class BankCoreApiTest {
 
+    private MockWebServer mockWebServer;
+
     private final BankCoreApi api = new BankCoreApi();
+
+    @Before
+    public void beforeEach() {
+        mockWebServer = new MockWebServer();
+        // That's how it works :/
+        api.getApiClient().setBasePath(
+                mockWebServer.url("").toString().replaceAll("/$", "")
+        );
+    }
+
+    @After
+    public void afterEach() throws IOException {
+        mockWebServer.shutdown();
+    }
 
     /**
      * 
      *
      * Commit withdrawal
      *
-     * @throws ApiException
+     * @throws Exception
      *          if the Api call fails
      */
     @Test
-    public void commitReservationOnAccountTest() throws ApiException {
-        String reservationId = null;
+    public void commitReservationOnAccountTest() throws Exception {
+        String reservationId = "123456";
+
+        mockWebServer.enqueue(new MockResponse().setBody("\"\""));
+
         String response = api.commitReservationOnAccount(reservationId);
 
-        // TODO: test validations
+        RecordedRequest request = mockWebServer.takeRequest();
+        assertEquals(String.format("/v1/reservation/commit/%s", reservationId), request.getPath());
+        assertEquals("POST", request.getMethod());
+        assertEquals("", response);
     }
     /**
      * 
      *
      * Get Bank Account balance
      *
-     * @throws ApiException
+     * @throws Exception
      *          if the Api call fails
      */
     @Test
-    public void getAccountBalanceTest() throws ApiException {
-        String accountNumber = null;
+    public void getAccountBalanceTest() throws Exception {
+
+        String balance = "1000";
+        mockWebServer.enqueue(new MockResponse().setBody(String.format("{\"balance\": %s}", balance)));
+
+        String accountNumber = "LT355636149269234955";
         BalanceResponse response = api.getAccountBalance(accountNumber);
 
-        // TODO: test validations
+        RecordedRequest request = mockWebServer.takeRequest();
+        assertEquals(String.format("/v1/account/balance/%s", accountNumber), request.getPath());
+        assertEquals(1000, response.getBalance().intValue());
     }
     /**
      * 
      *
      * Get Bank Account number by Credit Card number
      *
-     * @throws ApiException
+     * @throws Exception
      *          if the Api call fails
      */
     @Test
-    public void getAccountNumberByCardTest() throws ApiException {
-        String cardNumber = null;
+    public void getAccountNumberByCardTest() throws Exception {
+        String accountNumber = "LT355636149269234955";
+        mockWebServer.enqueue(new MockResponse().setBody(String.format("{\"accountNumber\": %s}", accountNumber)));
+
+        String cardNumber = "4731055520998487";
         CardResponse response = api.getAccountNumberByCard(cardNumber);
 
-        // TODO: test validations
+        RecordedRequest request = mockWebServer.takeRequest();
+        assertEquals(String.format("/v1/account/%s", cardNumber), request.getPath());
+        assertEquals(accountNumber, response.getAccountNumber());
     }
     /**
      * 
      *
      * Reserve money on a Bank Account
      *
-     * @throws ApiException
+     * @throws Exception
      *          if the Api call fails
      */
     @Test
-    public void reserveMoneyOnAccountTest() throws ApiException {
-        ReservationRequest body = null;
-        ReservationResponse response = api.reserveMoneyOnAccount(body);
+    public void reserveMoneyOnAccountTest() throws Exception {
+        String accountNumber = "LT355636149269234955";
+        String reservationId = "123456";
+        Integer reservedAmount = 1000;
+        ReservationRequest reservationRequest = new ReservationRequest(accountNumber, reservedAmount);
 
-        // TODO: test validations
+        mockWebServer.enqueue(new MockResponse().setBody(String.format("{\"reservationId\": %s}", reservationId)));
+
+        ReservationResponse response = api.reserveMoneyOnAccount(reservationRequest);
+
+        RecordedRequest request = mockWebServer.takeRequest();
+        assertEquals("/v1/reservation", request.getPath());
+        assertEquals("POST", request.getMethod());
+
+        Gson gson = new Gson();
+
+        assertEquals(gson.toJson(reservationRequest), request.getBody().readUtf8());
+        assertEquals(reservationId, response.getReservationId());
     }
     /**
      * 
      *
      * Cancel reservation
      *
-     * @throws ApiException
+     * @throws Exception
      *          if the Api call fails
      */
     @Test
-    public void cancelMoneyReservationOnAccountTest() throws ApiException {
-        String reservationId = null;
+    public void cancelMoneyReservationOnAccountTest() throws Exception {
+
+        String reservationId = "123456";
+
+        mockWebServer.enqueue(new MockResponse().setBody("\"\""));
+
         String response = api.cancelMoneyReservationOnAccount(reservationId);
 
-        // TODO: test validations
+        RecordedRequest request = mockWebServer.takeRequest();
+        assertEquals(String.format("/v1/reservation/%s", reservationId), request.getPath());
+        assertEquals("DELETE", request.getMethod());
+        assertEquals("", response);
     }
 }

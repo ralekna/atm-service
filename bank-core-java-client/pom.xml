@@ -181,6 +181,11 @@
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp</groupId>
+      <artifactId>mockwebserver</artifactId>
+      <version>${okhttp-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp</groupId>
       <artifactId>logging-interceptor</artifactId>
       <version>${okhttp-version}</version>
     </dependency>
