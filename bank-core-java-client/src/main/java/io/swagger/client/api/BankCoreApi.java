@@ -37,14 +37,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BankCoreDemoApiApi {
+public class BankCoreApi {
     private ApiClient apiClient;
 
-    public BankCoreDemoApiApi() {
+    public BankCoreApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public BankCoreDemoApiApi(ApiClient apiClient) {
+    public BankCoreApi(ApiClient apiClient) {
         this.apiClient = apiClient;
     }
 
@@ -556,14 +556,14 @@ public class BankCoreDemoApiApi {
         return call;
     }
     /**
-     * Build call for reserveMoneyOnAccount1
+     * Build call for cancelMoneyReservationOnAccount
      * @param reservationId  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call reserveMoneyOnAccount1Call(String reservationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call cancelMoneyReservationOnAccountCall(String reservationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -606,13 +606,13 @@ public class BankCoreDemoApiApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call reserveMoneyOnAccount1ValidateBeforeCall(String reservationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call cancelMoneyReservationOnAccountValidateBeforeCall(String reservationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'reservationId' is set
         if (reservationId == null) {
-            throw new ApiException("Missing the required parameter 'reservationId' when calling reserveMoneyOnAccount1(Async)");
+            throw new ApiException("Missing the required parameter 'reservationId' when calling cancelMoneyReservationOnAccount(Async)");
         }
         
-        com.squareup.okhttp.Call call = reserveMoneyOnAccount1Call(reservationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = cancelMoneyReservationOnAccountCall(reservationId, progressListener, progressRequestListener);
         return call;
 
         
@@ -628,8 +628,8 @@ public class BankCoreDemoApiApi {
      * @return String
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public String reserveMoneyOnAccount1(String reservationId) throws ApiException {
-        ApiResponse<String> resp = reserveMoneyOnAccount1WithHttpInfo(reservationId);
+    public String cancelMoneyReservationOnAccount(String reservationId) throws ApiException {
+        ApiResponse<String> resp = cancelMoneyReservationOnAccountWithHttpInfo(reservationId);
         return resp.getData();
     }
 
@@ -640,8 +640,8 @@ public class BankCoreDemoApiApi {
      * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<String> reserveMoneyOnAccount1WithHttpInfo(String reservationId) throws ApiException {
-        com.squareup.okhttp.Call call = reserveMoneyOnAccount1ValidateBeforeCall(reservationId, null, null);
+    public ApiResponse<String> cancelMoneyReservationOnAccountWithHttpInfo(String reservationId) throws ApiException {
+        com.squareup.okhttp.Call call = cancelMoneyReservationOnAccountValidateBeforeCall(reservationId, null, null);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -654,7 +654,7 @@ public class BankCoreDemoApiApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call reserveMoneyOnAccount1Async(String reservationId, final ApiCallback<String> callback) throws ApiException {
+    public com.squareup.okhttp.Call cancelMoneyReservationOnAccountAsync(String reservationId, final ApiCallback<String> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -675,7 +675,7 @@ public class BankCoreDemoApiApi {
             };
         }
 
-        com.squareup.okhttp.Call call = reserveMoneyOnAccount1ValidateBeforeCall(reservationId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = cancelMoneyReservationOnAccountValidateBeforeCall(reservationId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

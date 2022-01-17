@@ -20,18 +20,13 @@ import io.swagger.client.model.ReservationResponse;
 import org.junit.Test;
 import org.junit.Ignore;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
- * API tests for BankCoreDemoApiApi
+ * API tests for BankCoreApi
  */
 @Ignore
-public class BankCoreDemoApiApiTest {
+public class BankCoreApiTest {
 
-    private final BankCoreDemoApiApi api = new BankCoreDemoApiApi();
+    private final BankCoreApi api = new BankCoreApi();
 
     /**
      * 
@@ -102,9 +97,9 @@ public class BankCoreDemoApiApiTest {
      *          if the Api call fails
      */
     @Test
-    public void reserveMoneyOnAccount1Test() throws ApiException {
+    public void cancelMoneyReservationOnAccountTest() throws ApiException {
         String reservationId = null;
-        String response = api.reserveMoneyOnAccount1(reservationId);
+        String response = api.cancelMoneyReservationOnAccount(reservationId);
 
         // TODO: test validations
     }

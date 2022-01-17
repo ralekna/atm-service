@@ -1,14 +1,14 @@
-# BankCoreDemoApiApi
+# BankCoreApi
 
 All URIs are relative to *http://localhost:8080*
 
 | Method                                                                             | HTTP request                                    | Description |
 |------------------------------------------------------------------------------------|-------------------------------------------------|-------------|
-| [**commitReservationOnAccount**](BankCoreDemoApiApi.md#commitReservationOnAccount) | **POST** /v1/reservation/commit/{reservationId} |             |
-| [**getAccountBalance**](BankCoreDemoApiApi.md#getAccountBalance)                   | **GET** /v1/account/balance/{accountNumber}     |             |
-| [**getAccountNumberByCard**](BankCoreDemoApiApi.md#getAccountNumberByCard)         | **GET** /v1/account/{cardNumber}                |             |
-| [**reserveMoneyOnAccount**](BankCoreDemoApiApi.md#reserveMoneyOnAccount)           | **POST** /v1/reservation                        |             |
-| [**reserveMoneyOnAccount1**](BankCoreDemoApiApi.md#reserveMoneyOnAccount1)         | **DELETE** /v1/reservation/{reservationId}      |             |
+| [**commitReservationOnAccount**](BankCoreApi.md#commitReservationOnAccount) | **POST** /v1/reservation/commit/{reservationId} |             |
+| [**getAccountBalance**](BankCoreApi.md#getAccountBalance)                   | **GET** /v1/account/balance/{accountNumber}     |             |
+| [**getAccountNumberByCard**](BankCoreApi.md#getAccountNumberByCard)         | **GET** /v1/account/{cardNumber}                |             |
+| [**reserveMoneyOnAccount**](BankCoreApi.md#reserveMoneyOnAccount)           | **POST** /v1/reservation                        |             |
+| [**cancelMoneyReservationOnAccount**](BankCoreApi.md#cancelMoneyReservationOnAccount)         | **DELETE** /v1/reservation/{reservationId}      |             |
 
 <a name="commitReservationOnAccount"></a>
 # **commitReservationOnAccount**
@@ -22,25 +22,25 @@ Commit withdrawal
 ```java
 // Import classes:
 import io.swagger.client.ApiException;
-import io.swagger.client.api.BankCoreDemoApiApi;
+import io.swagger.client.api.BankCoreApi;
 
 
-BankCoreDemoApiApi apiInstance = new BankCoreDemoApiApi();
+BankCoreApi apiInstance = new BankCoreApi();
 String reservationId = "reservationId_example"; // String | 
 try {
     String result = apiInstance.commitReservationOnAccount(reservationId);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling BankCoreDemoApiApi#commitReservationOnAccount");
+    System.err.println("Exception when calling BankCoreApi#commitReservationOnAccount");
     e.printStackTrace();
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reservationId** | **String**|  |
+| Name              | Type       | Description | Notes |
+|-------------------|------------|-------------|-------|
+| **reservationId** | **String** |             |       |
 
 ### Return type
 
@@ -67,15 +67,15 @@ Get Bank Account balance
 ```java
 // Import classes:
 import io.swagger.client.ApiException;
-import io.swagger.client.api.BankCoreDemoApiApi;
+import io.swagger.client.api.BankCoreApi;
 
-BankCoreDemoApiApi apiInstance = new BankCoreDemoApiApi();
+BankCoreApi apiInstance = new BankCoreApi();
 String accountNumber = "accountNumber_example"; // String | 
 try {
     BalanceResponse result = apiInstance.getAccountBalance(accountNumber);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling BankCoreDemoApiApi#getAccountBalance");
+    System.err.println("Exception when calling BankCoreApi#getAccountBalance");
     e.printStackTrace();
 }
 ```
@@ -111,16 +111,16 @@ Get Bank Account number by Credit Card number
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
-//import io.swagger.client.api.BankCoreDemoApiApi;
+//import io.swagger.client.api.BankCoreApi;
 
 
-BankCoreDemoApiApi apiInstance = new BankCoreDemoApiApi();
+BankCoreApi apiInstance = new BankCoreApi();
 String cardNumber = "cardNumber_example"; // String | 
 try {
     CardResponse result = apiInstance.getAccountNumberByCard(cardNumber);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling BankCoreDemoApiApi#getAccountNumberByCard");
+    System.err.println("Exception when calling BankCoreApi#getAccountNumberByCard");
     e.printStackTrace();
 }
 ```
@@ -156,16 +156,16 @@ Reserve money on a Bank Account
 ```java
 // Import classes:
 import io.swagger.client.ApiException;
-import io.swagger.client.api.BankCoreDemoApiApi;
+import io.swagger.client.api.BankCoreApi;
 
 
-BankCoreDemoApiApi apiInstance = new BankCoreDemoApiApi();
+BankCoreApi apiInstance = new BankCoreApi();
 ReservationRequest body = new ReservationRequest(); // ReservationRequest | 
 try {
     ReservationResponse result = apiInstance.reserveMoneyOnAccount(body);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling BankCoreDemoApiApi#reserveMoneyOnAccount");
+    System.err.println("Exception when calling BankCoreApi#reserveMoneyOnAccount");
     e.printStackTrace();
 }
 ```
@@ -189,9 +189,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="reserveMoneyOnAccount1"></a>
-# **reserveMoneyOnAccount1**
-> String reserveMoneyOnAccount1(reservationId)
+<a name="cancelMoneyReservationOnAccount"></a>
+# **cancelMoneyReservationOnAccount**
+> String cancelMoneyReservationOnAccount(reservationId)
 
 
 
@@ -201,16 +201,16 @@ Cancel reservation
 ```java
 // Import classes:
 //import io.swagger.client.ApiException;
-//import io.swagger.client.api.BankCoreDemoApiApi;
+//import io.swagger.client.api.BankCoreApi;
 
 
-BankCoreDemoApiApi apiInstance = new BankCoreDemoApiApi();
+BankCoreApi apiInstance = new BankCoreApi();
 String reservationId = "reservationId_example"; // String | 
 try {
-    String result = apiInstance.reserveMoneyOnAccount1(reservationId);
+    String result = apiInstance.cancelMoneyReservationOnAccount(reservationId);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling BankCoreDemoApiApi#reserveMoneyOnAccount1");
+    System.err.println("Exception when calling BankCoreApi#cancelMoneyReservationOnAccount");
     e.printStackTrace();
 }
 ```
