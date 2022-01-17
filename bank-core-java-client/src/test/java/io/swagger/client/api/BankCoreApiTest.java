@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
 import com.squareup.okhttp.mockwebserver.RecordedRequest;
+import io.swagger.client.ApiException;
 import io.swagger.client.model.BalanceResponse;
 import io.swagger.client.model.CardResponse;
 import io.swagger.client.model.ReservationRequest;
@@ -53,8 +54,6 @@ public class BankCoreApiTest {
     }
 
     /**
-     * 
-     *
      * Commit withdrawal
      *
      * @throws Exception
@@ -74,8 +73,28 @@ public class BankCoreApiTest {
         assertEquals("", response);
     }
     /**
-     * 
+     * Commit withdrawal
      *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void commitNonExistingReservationOnAccountTest() throws Exception {
+        String reservationId = "123456";
+
+        mockWebServer.enqueue(new MockResponse().setBody("\"\"").setResponseCode(404));
+
+        try {
+            api.commitReservationOnAccount(reservationId);
+        } catch (ApiException exception) {
+            assertEquals(404, exception.getCode());
+        }
+
+        RecordedRequest request = mockWebServer.takeRequest();
+        assertEquals(String.format("/v1/reservation/commit/%s", reservationId), request.getPath());
+        assertEquals("POST", request.getMethod());
+    }
+    /**
      * Get Bank Account balance
      *
      * @throws Exception
