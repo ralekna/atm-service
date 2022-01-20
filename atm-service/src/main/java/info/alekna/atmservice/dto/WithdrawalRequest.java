@@ -8,7 +8,7 @@ import javax.validation.constraints.Positive;
 
 public record WithdrawalRequest(
         @NotNull(message = "Card number is required")
-        @CreditCardNumber(message = "Invalid card number")
+        @CreditCardNumber(message = "Invalid card number", ignoreNonDigitCharacters = true)
         String cardNumber,
 
         @NotNull

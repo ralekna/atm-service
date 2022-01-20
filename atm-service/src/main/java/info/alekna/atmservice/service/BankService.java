@@ -64,6 +64,7 @@ public class BankService {
         } catch (ApiException exception) {
             handleIoException(exception);
             if (exception.getCode() == 400) {
+                // There was some race condition and money were reserved somewhere else
                 throw new BankServiceException.BalanceTooLow("Couldn't reserve money on account because balance is too low");
             } else if (exception.getCode() == 404) {
                 // This also shouldn't happen here but just in case...

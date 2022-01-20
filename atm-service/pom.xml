@@ -51,13 +51,25 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
+            <version>22.0.0</version>
             <scope>compile</scope>
         </dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>3.9.0</version>
+			<version>4.2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-contract-wiremock</artifactId>
+			<version>3.0.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock</artifactId>
+			<version>2.27.2</version>
 			<scope>test</scope>
 		</dependency>
     </dependencies>
@@ -69,25 +81,25 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<plugin>
-				<groupId>uk.co.automatictester</groupId>
-				<artifactId>wiremock-maven-plugin</artifactId>
-				<version>7.0.0</version>
+<!--			<plugin>-->
+<!--				<groupId>uk.co.automatictester</groupId>-->
+<!--				<artifactId>wiremock-maven-plugin</artifactId>-->
+<!--				<version>7.0.0</version>-->
 
-				<configuration>
-					<keepRunning>true</keepRunning>
-					<dir>target/classes</dir>
-					<params>--port=8081 --verbose</params>
-				</configuration>
+<!--				<configuration>-->
+<!--					<keepRunning>true</keepRunning>-->
+<!--					<dir>target/classes</dir>-->
+<!--					<params>&#45;&#45;port=8081 &#45;&#45;verbose</params>-->
+<!--				</configuration>-->
 
-				<dependencies>
-					<dependency>
-						<groupId>com.github.tomakehurst</groupId>
-						<artifactId>wiremock</artifactId>
-						<version>2.27.2</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+<!--				<dependencies>-->
+<!--					<dependency>-->
+<!--						<groupId>com.github.tomakehurst</groupId>-->
+<!--						<artifactId>wiremock</artifactId>-->
+<!--						<version>2.27.2</version>-->
+<!--					</dependency>-->
+<!--				</dependencies>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
