@@ -6,8 +6,26 @@ http://localhost:8080/swagger-ui/
 
 ## Usage
 
+Compile and install BankCore client to local Maven repo:
+```bash
+cd bank-core-java-client
+mvn clean install
+```
+
+Run tests:
+```bash
+cd atm-service
+mvn clean test
+```
+
+
 Run a server with mock BankCore API:
-`mvn mockserver:run spring-boot:run`
+```bash
+cd atm-service
+mvn clean spring-boot:run
+```
+
+**NOTE: WireMock server is not running when application is launched so your requests will fail**
 
 POST a request to /issues/money with body
 
@@ -25,5 +43,3 @@ Valid card numbers
 - 4731059400856500
 - 4731059982346342
 - 4731053770046701
-Invalid card number
-- 4731051429700223
